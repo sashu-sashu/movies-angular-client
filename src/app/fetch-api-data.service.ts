@@ -7,6 +7,7 @@ const apiUrl = 'https://bw-movies-server.herokuapp.com/';
 
 //get token from localStorage
 const token = localStorage.getItem('token');
+const username = localStorage.getItem('username'); // need to save this somewhere
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ const token = localStorage.getItem('token');
 export class FetchApiDataService {
 
   constructor(private http: HttpClient) {
-    this.http = http
+    this.http = http;
   }
 }
 
