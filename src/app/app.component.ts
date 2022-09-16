@@ -8,6 +8,7 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+  
 export class AppComponent {
   title = 'movies-angular-client';
 
