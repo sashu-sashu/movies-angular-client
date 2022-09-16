@@ -15,6 +15,7 @@ const username = localStorage.getItem('username'); // need to save this somewher
 export class FetchApiDataService {
   [x: string]: any
   ['userRegistration']: any
+  ['userLogin']: any
   constructor(private http: HttpClient) {
     this.http = http;
   }
