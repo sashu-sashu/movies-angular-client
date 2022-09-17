@@ -83,8 +83,8 @@ export class MoviesComponent implements OnInit {
     this.dialog.open(DirectorComponent, {
       data: {
         Name: name,
-        Bio: bio,
-        Birthdate: Date.parse(birthday),
+        BIO: bio,
+        Birth: Date.parse(birthday),
       },
       width: '500px'
     });
