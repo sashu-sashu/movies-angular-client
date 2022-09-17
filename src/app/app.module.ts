@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -63,6 +64,7 @@ schemas: [CUSTOM_ELEMENTS_SCHEMA];
     MatDialogModule, 
     MatSnackBarModule,
     FormsModule,
+    FlexLayoutModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [ {

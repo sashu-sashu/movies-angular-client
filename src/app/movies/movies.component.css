@@ -1,0 +1,20 @@
+.content {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.content > mat-card {
+    width: 200px;
+    margin: 8px;
+    padding: 16px;
+}
+
+.content > mat-card mat-card-header  {
+    padding-top: 8px;
+}
+
+.content img {
+    max-width: 100%;
+    height: auto;
+    padding: 0 8px;
+}
