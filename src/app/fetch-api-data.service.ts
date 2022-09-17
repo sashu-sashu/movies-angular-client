@@ -13,25 +13,8 @@ const username = localStorage.getItem('username'); // need to save this somewher
   providedIn: 'root'
 })
 export class FetchApiDataService {
-  [x: string]: any
-  ['userRegistration']: any
-  ['userLogin']: any
-  ['editUser']: any
-  ['getAllMovies']: any
-  ['getFavoriteMovies']: any
-  ['addFavoriteMovie']: any
-  ['removeFavoriteMovie']: any
 
-  constructor(private http: HttpClient) {
-    this.http = http;
-  }
-}
-
-export class UserRegistrationService {
-  // Inject the HttpClient module to the constructor params
- // This will provide HttpClient to the entire class, making it available via this.http
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
  // User registration endpoint
   public userRegistration(userDetails: Record<string, any>): Observable<any> {

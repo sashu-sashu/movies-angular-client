@@ -4,13 +4,26 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
+type User = {
+  Username: string,
+  Password: string,
+  Email: string,
+  Birth: string,
+}
+
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
- @Input() userData: Record<string, any> = {};
+  @Input() userData: User = {
+    Username: '',
+    Password: '',
+    Email: '',
+    Birth: '',
+ };
 
   constructor(
     public fetchApiData: FetchApiDataService,

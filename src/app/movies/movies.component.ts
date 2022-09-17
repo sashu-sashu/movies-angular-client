@@ -8,18 +8,40 @@ import { SynopsisComponent } from '../synopsis/synopsis.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+type Movie = {
+  _id: string,
+  Title: string,
+  Description: string,
+  Year: string,
+  Duration: string,
+  ImageURL: string,
+  Director: {
+    Name: string,
+    BIO: string,
+    Birth: string,
+    Death: string,
+  },
+  Genre: {
+    Name: string,
+    Description: string,
+  }
+}
+
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css']
 })
+  
+
+  
 export class MoviesComponent implements OnInit {
-  movies: Record<string, any>[] = [];
-  favoriteMovies: Record<string, any>[] = [];
+  movies: Movie[] = [];
+  favoriteMovies: Movie[] = [];
 
   constructor(public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +49,7 @@ export class MoviesComponent implements OnInit {
   }
 
   getMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((response: Record<string, any>[]) => {
+    this.fetchApiData.getAllMovies().subscribe((response: Movie[]) => {
       this.movies = response;
       console.log(response)
       return response;
@@ -35,7 +57,7 @@ export class MoviesComponent implements OnInit {
   }
 
     getFavoriteMovies(): void {
-    this.fetchApiData.getFavoriteMovies().subscribe((response: Record<string, any>[]) => {
+    this.fetchApiData.getFavoriteMovies().subscribe((response: Movie[]) => {
       this.favoriteMovies = response;
       console.log(response)
       return response;
@@ -43,7 +65,7 @@ export class MoviesComponent implements OnInit {
   }
 
   isFav(id: string): boolean {
-    return this.favoriteMovies.findIndex(favoriteMovie => favoriteMovie['id'] === id) !== -1
+    return this.favoriteMovies.findIndex(favoriteMovie => favoriteMovie._id === id) !== -1
   }
 
   openGenreDialog(name: string, description: string): void {
@@ -57,12 +79,12 @@ export class MoviesComponent implements OnInit {
     });
   }
 
-  openDirectorDialog(name: string, bio: string, birthday: Date): void {
+  openDirectorDialog(name: string, bio: string, birthday: string): void {
     this.dialog.open(DirectorComponent, {
       data: {
         Name: name,
         Bio: bio,
-        Birthdate: birthday,
+        Birthdate: Date.parse(birthday),
       },
       width: '500px'
     });
