@@ -16,6 +16,12 @@ export class FetchApiDataService {
   [x: string]: any
   ['userRegistration']: any
   ['userLogin']: any
+  ['editUser']: any
+  ['getAllMovies']: any
+  ['getFavoriteMovies']: any
+  ['addFavoriteMovie']: any
+  ['removeFavoriteMovie']: any
+
   constructor(private http: HttpClient) {
     this.http = http;
   }
@@ -28,7 +34,7 @@ export class UserRegistrationService {
   }
 
  // User registration endpoint
-  public userRegistration(userDetails: any): Observable<any> {
+  public userRegistration(userDetails: Record<string, any>): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + `users`, userDetails).pipe(
       catchError(this.handleError)
@@ -36,7 +42,7 @@ export class UserRegistrationService {
   }
 
   // User login endpoint
-  public userLogin(userDetails: any): Observable<any> {
+  public userLogin(userDetails: Record<string, any>): Observable<any> {
     return this.http.post(apiUrl + 'login', userDetails).pipe(
       catchError(this.handleError)
     );
@@ -80,7 +86,7 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // gets genre information of a selected movie
+  // gets genre information of a selected movie (needs token)
   public getGenre(genreName: any): Observable<any> {
     return this.http
       .get(apiUrl + `movies/genre/${genreName}`, {
@@ -91,7 +97,7 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // gets user and their favorite movies
+  // gets user and their favorite movies (needs token)
   public getUser(): Observable<any> {
     const token = localStorage.getItem('token');
     // Get username from localStorage for URLs
@@ -105,7 +111,7 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // adds movie to user favorite movies list
+  // adds movie to user favorite movies list (needs token)
   public addFavoriteMovie(movieID: any): Observable<any> {
     const token = localStorage.getItem('token');
     // Get username from localStorage for URLs
@@ -119,7 +125,7 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // allows user to edit their info
+  // allows user to edit their info (needs token)
   public editUser(updateDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
     // Get username from localStorage for URLs
@@ -132,7 +138,7 @@ export class UserRegistrationService {
       })
   }
 
-  // displays favorite movies list of a user
+  // displays favorite movies list of a user (needs token)
   getFavoriteMovies(): Observable<any> {
     // Get Authorization token stored in local storage
     const token = localStorage.getItem('token');
@@ -150,7 +156,7 @@ export class UserRegistrationService {
       );
   }
 
-  // removes movie from user's favorite movies list
+  // removes movie from user's favorite movies list (needs token)
   public removeFavoriteMovie(movieID: any): Observable<any> {
     const token = localStorage.getItem('token');
     // Get username from localStorage for URLs
@@ -164,7 +170,7 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // deletes all details of a user
+  // deletes all details of a user (needs token)
   deleteUser(): Observable<any> {
     const token = localStorage.getItem('token');
     // Get username from localStorage for URLs

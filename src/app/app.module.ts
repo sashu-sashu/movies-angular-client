@@ -8,18 +8,37 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MoviesComponent } from './movies/movies.component';
+import { DirectorComponent } from './director/director.component';
+import { synopsisComponent } from './synopsis/synopsis.component';
+import { GenreComponent } from './genre/genre.component';
+
+const appRoutes: Routes = [
+  { path: 'welcome', component: WelcomeComponent },
+  { path: 'movies', component: MoviesComponent },
+  { path: 'profile', component: UserProfileComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegistrationFormComponent,
-    UserLoginFormComponent
+    UserLoginFormComponent,
+    WelcomeComponent,
+    UserProfileComponent,
+    DirectorComponent,
+    synopsisComponent,
+    GenreComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +52,7 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
     MatDialogModule, 
     MatSnackBarModule,
     FormsModule,
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]
