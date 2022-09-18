@@ -1,3 +1,33 @@
+<app-navbar></app-navbar>
+<div class="user-profile-page">
+    <!-- User Profile -->
+    <mat-card class="user-profile-card">
+        <mat-card-header class="user-profile-card-header">
+            <mat-card-title>Profile Information</mat-card-title>
+        </mat-card-header>
+
+        <!-- View Profile Information -->
+        <mat-card-content class="user-profile-card-content">
+            <p><b>Username:</b> {{user.Username}}</p>
+            <p><b>Email:</b> {{user.Email}}</p>
+            <p><b>Birthdate:</b> {{user.Birth | date }}</p>
+        </mat-card-content>
+
+        <!-- Edit Profile Information & Delete Profile -->
+        <mat-card-actions class="user-profile-actions">
+
+            <button mat-raised-button (click)="openEditProfileDialog()" color="primary">
+                <mat-icon>edit</mat-icon>
+                Edit Profile
+            </button>
+            <button mat-raised-button (click)="deleteProfile()" color="warn">
+                <mat-icon>delete_forever</mat-icon>
+                Delete Profile
+            </button>
+
+
+        </mat-card-actions>
+    </mat-card>
 <mat-card class="profile-dialog">
   <mat-card-header>
     <mat-card-title class="profile-dialog-title"
@@ -53,3 +83,37 @@
     </button>
   </mat-card-actions>
 </mat-card>
+    <div class="title-my-favs">
+        <h1> 
+            <span> &#10070;</span>  
+            My favorite movies 
+            <span> &#10070;</span> 
+        </h1>
+    </div>
+
+    <section class="movie-view">
+        
+        <mat-card class="card-internals" *ngFor="let movie of filteredMovies;">
+    
+            
+            <div class="center">
+                <img 
+                src={{movie.ImagePath}} 
+                alt= {{movie.Title}}
+                width = 50%       
+            />
+            </div>
+                    
+            <mat-card-footer tooltip="remove" >                       
+                <button
+                    mat-stroked-button
+                    (click)="removeFavoriteMovie(movie._id)"                       
+                    color="basic"                    
+                >  
+                    <mat-icon> delete</mat-icon>  
+                </button>                                                      
+            </mat-card-footer>   
+        </mat-card>  
+    </section>   
+</div>
+
