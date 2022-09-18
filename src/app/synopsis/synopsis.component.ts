@@ -1,21 +1,20 @@
+/*eslint-disable @angular-eslint/no-empty-lifecycle-method*/
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-synopsis',
   templateUrl: './synopsis.component.html',
-  styleUrls: ['./synopsis.component.css']
+  styleUrls: ['./synopsis.component.css'],
 })
 export class SynopsisComponent implements OnInit {
-
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
-      Title: string,
-      Description: string,
+      Title: string;
+      Description: string;
     }
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

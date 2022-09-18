@@ -1,23 +1,20 @@
+/*eslint-disable @angular-eslint/no-empty-lifecycle-method*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-
   /**
    * added router to route to different components
-   * @param router 
+   * @param router
    */
-  constructor(
-    public router: Router
-  ) { }
+  constructor(public router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   /**
    * route to movies list
@@ -40,5 +37,4 @@ export class NavbarComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['welcome']);
   }
-
 }

@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
 const apiUrl = 'https://bw-movies-server.herokuapp.com/';
@@ -10,24 +14,23 @@ const token = localStorage.getItem('token');
 const username = localStorage.getItem('username'); // need to save this somewhere
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FetchApiDataService {
-
   constructor(private http: HttpClient) {}
 
- // User registration endpoint
+  // User registration endpoint
   public userRegistration(userDetails: Record<string, any>): Observable<any> {
-    return this.http.post(apiUrl + `users`, userDetails).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .post(apiUrl + `users`, userDetails)
+      .pipe(catchError(this.handleError));
   }
 
   // User login endpoint
   public userLogin(userDetails: Record<string, any>): Observable<any> {
-    return this.http.post(apiUrl + 'login', userDetails).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .post(apiUrl + 'login', userDetails)
+      .pipe(catchError(this.handleError));
   }
 
   // gets all movies (needs token)
@@ -58,7 +61,6 @@ export class FetchApiDataService {
 
   // gets director's info (needs token)
   public getDirector(directorName: any): Observable<any> {
-
     return this.http
       .get(apiUrl + `movies/director/${directorName}`, {
         headers: new HttpHeaders({
@@ -99,11 +101,15 @@ export class FetchApiDataService {
     // Get username from localStorage for URLs
     const username = localStorage.getItem('user');
     return this.http
-      .post(apiUrl + `users/${username}/movies/${movieID}`, {}, {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
-        }),
-      })
+      .post(
+        apiUrl + `users/${username}/movies/${movieID}`,
+        {},
+        {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        }
+      )
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
@@ -112,12 +118,11 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
     // Get username from localStorage for URLs
     const username = localStorage.getItem('user');
-    return this.http
-      .put(apiUrl + `users/${username}`, updateDetails, {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token
-        })
-      })
+    return this.http.put(apiUrl + `users/${username}`, updateDetails, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      }),
+    });
   }
 
   // displays favorite movies list of a user (needs token)
@@ -130,12 +135,9 @@ export class FetchApiDataService {
       .get(apiUrl + `users/${username}/movies`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
-        })
+        }),
       })
-      .pipe(
-        map(this.extractResponseData),
-        catchError(this.handleError)
-      );
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // removes movie from user's favorite movies list (needs token)
@@ -171,7 +173,6 @@ export class FetchApiDataService {
     return body || {};
   }
 
-
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);
@@ -182,8 +183,6 @@ export class FetchApiDataService {
       );
       console.table(error);
     }
-    return throwError(
-      'Something bad happened; please try again later.'
-    );
+    return throwError('Something bad happened; please try again later.');
   }
 }

@@ -1,4 +1,4 @@
-// src/app/user-registration-form/user-registration-form.component.ts
+/*eslint-disable @angular-eslint/no-empty-lifecycle-method*/
 import { Component, OnInit, Input } from '@angular/core';
 
 // You'll use this import to close the dialog on success
@@ -10,39 +10,39 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-user-registration-form',
   templateUrl: './user-registration-form.component.html',
-  styleUrls: ['./user-registration-form.component.css']
+  styleUrls: ['./user-registration-form.component.css'],
 })
 export class UserRegistrationFormComponent implements OnInit {
-
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
-constructor(
+  constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar
+  ) {}
 
-ngOnInit(): void {
+  ngOnInit(): void {}
+
+  // This is the function responsible for sending the form inputs to the backend
+  registerUser(): void {
+    this.fetchApiData.userRegistration(this.userData).subscribe(
+      (response: string) => {
+        // Logic for a successful user registration goes here! (To be implemented)
+        this.dialogRef.close(); // This will close the modal on success!
+        console.log(response);
+        this.snackBar.open('user successfully registered', 'OK', {
+          duration: 2000,
+        });
+      },
+      (response: string) => {
+        console.log(response);
+        this.snackBar.open(response, 'OK', {
+          duration: 2000,
+        });
+      }
+    );
+  }
 }
-
-// This is the function responsible for sending the form inputs to the backend
-registerUser(): void {
-    this.fetchApiData.userRegistration(this.userData).subscribe((response: string) => {
-  // Logic for a successful user registration goes here! (To be implemented)
-      this.dialogRef.close(); // This will close the modal on success!
-      console.log(response)
-     this.snackBar.open('user successfully registered', 'OK', {
-        duration: 2000
-     });
-    }, (response: string) => {
-      console.log(response)
-      this.snackBar.open(response, 'OK', {
-        duration: 2000
-      });
-    });
-  }
-
-  }

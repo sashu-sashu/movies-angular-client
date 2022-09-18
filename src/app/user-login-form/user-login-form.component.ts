@@ -1,3 +1,4 @@
+/*eslint-disable @angular-eslint/no-empty-lifecycle-method*/
 import { Component, Input, OnInit } from '@angular/core';
 // You'll use this import to close the dialog on success
 import { MatDialogRef } from '@angular/material/dialog';
@@ -13,35 +14,36 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
-  styleUrls: ['./user-login-form.component.css']
+  styleUrls: ['./user-login-form.component.css'],
 })
 export class UserLoginFormComponent implements OnInit {
-
   @Input() userData = { Username: '', Password: '' };
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar,
-    public router: Router) { }
+    public router: Router
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   loginUser(): void {
-    this.fetchApiData.userLogin(this.userData).subscribe((result: any) => {
-      // Logic for a successful user registration goes here! (To be implemented)
-      this.dialogRef.close(); // This will close the modal on success!
-      //token and username in local storage
-      localStorage.setItem('token', result.token);
-      localStorage.setItem('user', result.user.Username);
+    this.fetchApiData.userLogin(this.userData).subscribe(
+      (result: any) => {
+        // Logic for a successful user registration goes here! (To be implemented)
+        this.dialogRef.close(); // This will close the modal on success!
+        //token and username in local storage
+        localStorage.setItem('token', result.token);
+        localStorage.setItem('user', result.user.Username);
 
-      //redirect to movies
-      this.router.navigate(['movies']);
-    }, (result: any) => {
-      this.snackBar.open(result, 'OK', {
-        duration: 2000
-      });
-    });
+        //redirect to movies
+        this.router.navigate(['movies']);
+      },
+      (result: any) => {
+        this.snackBar.open(result, 'OK', {
+          duration: 2000,
+        });
+      }
+    );
   }
-
 }

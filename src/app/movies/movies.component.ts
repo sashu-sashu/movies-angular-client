@@ -9,40 +9,38 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 type Movie = {
-  _id: string,
-  Title: string,
-  Description: string,
-  Year: string,
-  Duration: string,
-  ImageURL: string,
+  _id: string;
+  Title: string;
+  Description: string;
+  Year: string;
+  Duration: string;
+  ImageURL: string;
   Director: {
-    Name: string,
-    BIO: string,
-    Birth: string,
-    Death: string,
-  },
+    Name: string;
+    BIO: string;
+    Birth: string;
+    Death: string;
+  };
   Genre: {
-    Name: string,
-    Description: string,
-  }
-}
+    Name: string;
+    Description: string;
+  };
+};
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css']
+  styleUrls: ['./movies.component.css'],
 })
-  
-
-  
 export class MoviesComponent implements OnInit {
   movies: Movie[] = [];
   favoriteMovies: Movie[] = [];
 
-  constructor(public fetchApiData: FetchApiDataService,
+  constructor(
+    public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar,
-  ) { }
+    public snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.getMovies();
@@ -51,21 +49,25 @@ export class MoviesComponent implements OnInit {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((response: Movie[]) => {
       this.movies = response;
-      console.log(response)
+      console.log(response);
       return response;
     });
   }
 
-    getFavoriteMovies(): void {
+  getFavoriteMovies(): void {
     this.fetchApiData.getFavoriteMovies().subscribe((response: Movie[]) => {
       this.favoriteMovies = response;
-      console.log(response)
+      console.log(response);
       return response;
     });
   }
 
   isFav(id: string): boolean {
-    return this.favoriteMovies.findIndex(favoriteMovie => favoriteMovie._id === id) !== -1
+    return (
+      this.favoriteMovies.findIndex(
+        favoriteMovie => favoriteMovie._id === id
+      ) !== -1
+    );
   }
 
   openGenreDialog(name: string, description: string): void {
@@ -74,8 +76,7 @@ export class MoviesComponent implements OnInit {
         Name: name,
         Description: description,
       },
-      // Assign dialog width
-      width: '500px'
+      width: '500px',
     });
   }
 
@@ -86,7 +87,7 @@ export class MoviesComponent implements OnInit {
         BIO: bio,
         Birth: Date.parse(birthday),
       },
-      width: '500px'
+      width: '500px',
     });
   }
 
@@ -96,25 +97,28 @@ export class MoviesComponent implements OnInit {
         Title: title,
         Description: description,
       },
-      width: '500px'
+      width: '500px',
     });
   }
 
   addFavoriteMovie(movie_id: string): void {
-    this.fetchApiData.addFavoriteMovie(movie_id).subscribe((result: Record<string, any>) => {
-      console.log(result);
-    },
-    (result: Record<string, any>) => {
+    this.fetchApiData.addFavoriteMovie(movie_id).subscribe(
+      (result: Record<string, any>) => {
         console.log(result);
-
-    })
+      },
+      (result: Record<string, any>) => {
+        console.log(result);
+      }
+    );
   }
 
   removeFavoriteMovie(id: string): void {
     console.log(id);
-    this.fetchApiData.removeFavoriteMovie(id).subscribe((result: Record<string, any>) => {
-      console.log(result);
-      this.ngOnInit();
-    })
+    this.fetchApiData
+      .removeFavoriteMovie(id)
+      .subscribe((result: Record<string, any>) => {
+        console.log(result);
+        this.ngOnInit();
+      });
   }
 }

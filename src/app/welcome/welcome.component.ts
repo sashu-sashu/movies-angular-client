@@ -8,11 +8,11 @@ import { UserRegistrationFormComponent } from '../user-registration-form/user-re
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.css']
+  styleUrls: ['./welcome.component.css'],
 })
-export class WelcomeComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, public router: Router) { }
+export class WelcomeComponent implements OnInit {
+  constructor(public dialog: MatDialog, public router: Router) {}
 
   ngOnInit(): void {
     const user = localStorage.getItem('user');
@@ -20,19 +20,19 @@ export class WelcomeComponent implements OnInit {
 
     // if token and user are in localSotrage navigates to movies
     if (user) {
-      this.router.navigate(['movies'])
+      this.router.navigate(['movies']);
     }
   }
 
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
-      maxWidth: '280px'
+      maxWidth: '280px',
     });
   }
 
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
-      maxWidth: '280px'
+      maxWidth: '280px',
     });
   }
 }

@@ -27,7 +27,6 @@ import { SynopsisComponent } from './synopsis/synopsis.component';
 import { GenreComponent } from './genre/genre.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
-
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'movies', component: MoviesComponent },
@@ -48,7 +47,7 @@ schemas: [CUSTOM_ELEMENTS_SCHEMA];
     DirectorComponent,
     SynopsisComponent,
     GenreComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,18 +59,19 @@ schemas: [CUSTOM_ELEMENTS_SCHEMA];
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatFormFieldModule, 
-    MatDialogModule, 
+    MatFormFieldModule,
+    MatDialogModule,
     MatSnackBarModule,
     FormsModule,
     FlexLayoutModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [ {
-    provide: MatDialogRef,
-      useValue: {}
-    }
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {},
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
