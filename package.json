@@ -9,8 +9,8 @@
     "test": "ng test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "jsdoc": "jsdoc -c jsdoc.json",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "typedoc": "npx typedoc --entryPointStrategy expand ./src"
   },
   "private": true,
   "homepage": "https://sashu-sashu.github.io/movies-angular-client",
@@ -44,6 +44,7 @@
     "@typescript-eslint/parser": "5.37.0",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jsdoc": "^39.3.6",
     "eslint-plugin-prettier": "^4.2.1",
     "gh-pages": "^4.0.0",
     "jasmine-core": "~4.3.0",
@@ -54,6 +55,7 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "prettier": "^2.7.1",
     "prettier-eslint": "^15.0.1",
+    "typedoc": "^0.23.14",
     "typescript": "~4.7.2"
   }
 }
