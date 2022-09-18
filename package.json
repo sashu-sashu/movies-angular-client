@@ -10,7 +10,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "lint": "ng lint",
-    "typedoc": "npx typedoc --entryPointStrategy expand ./src"
+    "typedoc": "npx typedoc --entryPointStrategy expand ./src --exclude '**/*+(main|.spec|.e2e).ts'"
   },
   "private": true,
   "homepage": "https://sashu-sashu.github.io/movies-angular-client",
