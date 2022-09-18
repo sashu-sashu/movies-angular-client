@@ -18,7 +18,12 @@ type User = {
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
-  @Input() userData: User = {
+  /**
+   * Shows UserProfile page thatnks to its route reference 'profile'.
+   * The data it's partial because the user might change their data just partially.
+   * @param data 
+   */
+  @Input() userData: Partial<User> = {
     Username: '',
     Password: '',
     Email: '',
