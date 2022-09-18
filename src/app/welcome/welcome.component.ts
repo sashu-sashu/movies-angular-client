@@ -24,12 +24,18 @@ export class WelcomeComponent implements OnInit {
     }
   }
 
+  /**
+   * opens input dialog for registering user
+   */
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
       maxWidth: '280px',
     });
   }
 
+  /**
+   * opens dialog for user input
+   */
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
       maxWidth: '280px',
